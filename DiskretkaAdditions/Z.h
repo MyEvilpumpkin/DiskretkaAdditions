@@ -29,7 +29,7 @@ public:
 	std::string ToString() const override; // Преобразование Z в std::string
 	void Normalize() override;             // Нормализация числа
 
-	// Модули
+	// Дружественные функции
 	friend N ABS_Z_N(const Z&);            // Z-1
 	friend int POZ_Z_D(const Z&);          // Z-2
 	friend Z MUL_ZM_Z(const Z&);           // Z-3
@@ -40,5 +40,20 @@ public:
 	friend Z MUL_ZZ_Z(const Z&, const Z&); // Z-8
 	friend Z DIV_ZN_Z(const Z&, const N&); // Z-9
 	friend Z MOD_ZN_Z(const Z&, const N&); // Z-10
+
+	// Дружественные классы
+	friend class Q;
 };
+
+// Модули
+N ABS_Z_N(const Z&);            // Z-1
+int POZ_Z_D(const Z&);          // Z-2
+Z MUL_ZM_Z(const Z&);           // Z-3
+Z TRANS_N_Z(const N&);          // Z-4
+N TRANS_Z_N(const Z&);          // Z-5
+Z ADD_ZZ_Z(const Z&, const Z&); // Z-6
+Z SUB_ZZ_Z(const Z&, const Z&); // Z-7
+Z MUL_ZZ_Z(const Z&, const Z&); // Z-8
+Z DIV_ZN_Z(const Z&, const N&); // Z-9
+Z MOD_ZN_Z(const Z&, const N&); // Z-10
 

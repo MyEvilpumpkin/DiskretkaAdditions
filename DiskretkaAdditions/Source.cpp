@@ -1,10 +1,10 @@
 #include <iostream>
-#include "Z.h"
+#include "Q.h"
 
 using namespace std;
 
 int main() {
-
+	
 
 	system("pause");
 	return 0;
