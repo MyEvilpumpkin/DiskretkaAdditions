@@ -46,5 +46,8 @@ public:
 	friend N MOD_NN_N(const N&, const N&);             // N-12
 	friend N GCF_NN_N(const N&, const N&);             // N-13
 	friend N LCM_NN_N(const N&, const N&);             // N-14
+
+	// Дружественные классы
+	friend class Z;
 };
 
