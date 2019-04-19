@@ -58,7 +58,7 @@ Z::~Z() {
 
 Z& Z::operator=(const Z& z) {
 	if (this != &z) {
-		number = std::move(z.number);
+		number = z.number;
 		sign = z.sign;
 	}
 	return *this;
