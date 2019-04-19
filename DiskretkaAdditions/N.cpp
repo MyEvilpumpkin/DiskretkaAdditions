@@ -41,7 +41,7 @@ N::N(const std::string str) : N() {
 			size++;
 		}
 		else {
-			for (int i = 0; i < (size / 2); i++) {
+			for (size_t i = 0; i < (size / 2); i++) {
 				digit temp = digits[i];
 				digits[i] = digits[size - 1 - i];
 				digits[size - 1 - i] = temp;

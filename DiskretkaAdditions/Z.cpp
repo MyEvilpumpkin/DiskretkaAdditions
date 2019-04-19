@@ -28,7 +28,7 @@ Z::Z(const std::string str) : Z() {
 		if (!number.size)
 			number.SetOne();
 		else
-			for (int i = 0; i < (number.size / 2); i++) {
+			for (size_t i = 0; i < (number.size / 2); i++) {
 				digit temp = number.digits[i];
 				number.digits[i] = number.digits[number.size - 1 - i];
 				number.digits[number.size - 1 - i] = temp;
