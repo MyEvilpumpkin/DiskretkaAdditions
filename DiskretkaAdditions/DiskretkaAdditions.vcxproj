@@ -125,6 +125,7 @@
   <ItemGroup>
     <ClCompile Include="N.cpp" />
     <ClCompile Include="NRecognizer.cpp" />
+    <ClCompile Include="QRecognizer.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Z.cpp" />
     <ClCompile Include="ZRecognizer.cpp" />
@@ -133,6 +134,7 @@
     <ClInclude Include="Exceptions.h" />
     <ClInclude Include="N.h" />
     <ClInclude Include="NRecognizer.h" />
+    <ClInclude Include="QRecognizer.h" />
     <ClInclude Include="SpecialType.h" />
     <ClInclude Include="TemplateOperations.h" />
     <ClInclude Include="Z.h" />
