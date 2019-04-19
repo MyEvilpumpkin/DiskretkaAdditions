@@ -126,6 +126,7 @@
     <ClCompile Include="N.cpp" />
     <ClCompile Include="NRecognizer.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="ZRecognizer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Exceptions.h" />
@@ -133,6 +134,7 @@
     <ClInclude Include="NRecognizer.h" />
     <ClInclude Include="SpecialType.h" />
     <ClInclude Include="TemplateOperations.h" />
+    <ClInclude Include="ZRecognizer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
