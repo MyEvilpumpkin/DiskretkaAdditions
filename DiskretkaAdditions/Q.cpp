@@ -183,7 +183,9 @@ Q MUL_QQ_Q(Q& q1, Q& q2) {
 // Q-8
 Q DIV_QQ_Q(Q& q1, Q& q2) {
 	Q result;
-	if (!POZ_Z_D(q1.numerator) || !POZ_Z_D(q2.numerator)) // Eсли числитель = 0
+	if (q2.IsZero())
+		throw DivideByZero();
+	if (q1.IsZero()) // Eсли числитель = 0
 		result.SetZero();
 	else {
 		result.numerator = MUL_ZZ_Z(q1.numerator, TRANS_N_Z(q2.denominator)); // Присвоить числителю результата произведение первого числителя и второго знаменателя
