@@ -171,7 +171,8 @@ N ADD_1N_N(const N& n) {
 		while (result.digits[count] == 9)
 			result.digits[count++] = 0;
 		if (count == result.size) { // Если в числе все цифры девятки, то необходимо создать новый разряд
-			renew<digit>(result.digits, result.size, ++result.size);
+			renew<digit>(result.digits, result.size, result.size + 1);
+			result.size++;
 			result.digits[count] = 1; // Значение нового разряда равно единице
 		}
 		else
@@ -210,7 +211,8 @@ N ADD_NN_N(const N& n1, const N& n2) {
 			result.digits[i] = first.digits[i];
 	}
 	if (temp) { // Создаем разряд, если нужно
-		renew<digit>(result.digits, result.size, ++result.size);
+		renew<digit>(result.digits, result.size, result.size + 1);
+		result.size++;
 		result.digits[result.size - 1] = temp;
 	}
 	return result;
@@ -266,7 +268,8 @@ N MUL_ND_N(const N& n, const int d) {
 			result.digits[i] %= 10; // Определяем разряд
 		}
 		if (temp) { // Создаём ещё один разряд, если остаток не 0
-			renew<digit>(result.digits, result.size, ++result.size);
+			renew<digit>(result.digits, result.size, result.size + 1);
+			result.size++;
 			result.digits[result.size - 1] = temp;
 		}
 	}
@@ -296,7 +299,7 @@ N MUL_NN_N(const N& n1, const N& n2) {
 	result.SetZero();
 	if (NZER_N_B(n1) && NZER_N_B(n2))
 		for (size_t i = 0; i < n2.size; i++) // К результату, изначально равному 0, в каждом шаге цикла прибавляется i-ая цифра первого сомножителя
-			result = ADD_NN_N(result, MUL_Nk_N(MUL_ND_N(n1, n2.digits[i]), (const unsigned int)i));  // Умноженная на второй сомножитель и на 10^i
+			result = ADD_NN_N(result, MUL_Nk_N(MUL_ND_N(n1, n2.digits[i]), i));  // Умноженная на второй сомножитель и на 10^i
 	return result;
 }
 
