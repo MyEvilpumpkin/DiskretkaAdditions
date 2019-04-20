@@ -49,7 +49,7 @@ N::N(const std::string str) : N() {
 		}
 	}
 	else
-		throw WrongString();
+		throw IncorrectString();
 }
 
 N::N(const N& n) : N() {

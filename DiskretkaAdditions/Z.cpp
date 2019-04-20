@@ -35,7 +35,7 @@ Z::Z(const std::string str) : Z() {
 			}
 	}
 	else
-		throw WrongString();
+		throw IncorrectString();
 }
 
 Z::Z(const Z& z) : Z() {

@@ -56,7 +56,7 @@ Q::Q(const std::string str) : Q() {
 		Normalize();
 	}
 	else
-		throw WrongString();
+		throw IncorrectString();
 }
 
 Q::Q(const Q& q) : Q() {

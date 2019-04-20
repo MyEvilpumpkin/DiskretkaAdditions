@@ -1,9 +1,9 @@
 #pragma once
 #include <exception>
 
-class WrongString : public std::exception {
+class IncorrectString : public std::exception {
 public:
-	WrongString() : std::exception("Wrong String") { }
+	IncorrectString() : std::exception("Incorrect String") { }
 };
 
 class DivideByZero : public std::exception {
