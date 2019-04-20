@@ -299,7 +299,7 @@ N MUL_NN_N(const N& n1, const N& n2) {
 	result.SetZero();
 	if (NZER_N_B(n1) && NZER_N_B(n2))
 		for (size_t i = 0; i < n2.size; i++) // К результату, изначально равному 0, в каждом шаге цикла прибавляется i-ая цифра первого сомножителя
-			result = ADD_NN_N(result, MUL_Nk_N(MUL_ND_N(n1, n2.digits[i]), i));  // Умноженная на второй сомножитель и на 10^i
+			result = ADD_NN_N(result, MUL_Nk_N(MUL_ND_N(n1, n2.digits[i]), (const unsigned int)i));  // Умноженная на второй сомножитель и на 10^i
 	return result;
 }
 

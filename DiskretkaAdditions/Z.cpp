@@ -18,7 +18,7 @@ Z::Z(const std::string str) : Z() {
 	bool status = recognizer.GetStatus();
 	if (status) {
 		std::string tempStr = recognizer.GetPreparedString();
-		int pos = 0;
+		size_t pos = 0;
 		sign = tempStr[pos] == '+';
 		while (tempStr[pos + 1] != '\0') {
 			renew<digit>(number.digits, number.size, number.size + 1);

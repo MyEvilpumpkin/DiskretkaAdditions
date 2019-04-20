@@ -18,7 +18,7 @@ Q::Q(const std::string str) : Q() {
 	bool status = recognizer.GetStatus();
 	if (status) {
 		std::string tempStr = recognizer.GetPreparedString();
-		int pos = 0;
+		size_t pos = 0;
 		bool isDenom = false;
 		numerator.sign = tempStr[pos] == '+';
 		while (tempStr[pos + 1] != '\0') {
