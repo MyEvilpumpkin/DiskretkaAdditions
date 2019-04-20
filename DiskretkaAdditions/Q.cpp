@@ -184,7 +184,7 @@ Q MUL_QQ_Q(Q& q1, Q& q2) {
 Q DIV_QQ_Q(Q& q1, Q& q2) {
 	Q result;
 	if (q2.IsZero())
-		throw DivideByZero();
+		throw DivisionByZero();
 	if (q1.IsZero()) // Eсли числитель = 0
 		result.SetZero();
 	else {

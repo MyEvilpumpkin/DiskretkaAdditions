@@ -328,7 +328,7 @@ int DIV_NN_Dk(const N& n1, const N& n2, int& k) {
 		second = n1;
 	}
 	if (second.IsZero())
-		throw DivideByZero();
+		throw DivisionByZero();
 	if (com) {
 		k = (int)(first.size - second.size);
 		N temp = MUL_Nk_N(second, k);
@@ -357,7 +357,7 @@ N DIV_NN_N(const N& n1, const N& n2) {
 		second = n1;
 	}
 	if (second.IsZero())
-		throw DivideByZero();
+		throw DivisionByZero();
 	if (com) {
 		N part = first; // Временный остаток от деления
 		int k = 0;

@@ -6,8 +6,8 @@ public:
 	IncorrectString() : std::exception("Incorrect String") { }
 };
 
-class DivideByZero : public std::exception {
+class DivisionByZero : public std::exception {
 public:
-	DivideByZero() : std::exception("Divide By Zero") {}
+	DivisionByZero() : std::exception("Division By Zero") {}
 };
 

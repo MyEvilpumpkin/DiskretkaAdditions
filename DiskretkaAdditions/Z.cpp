@@ -203,7 +203,7 @@ Z MUL_ZZ_Z(const Z& z1, const Z& z2) {
 Z DIV_ZN_Z(const Z& z, const N& n) {
 	Z result;
 	if (n.IsZero())
-		throw DivideByZero();
+		throw DivisionByZero();
 	result.number = DIV_NN_N(z.number, n); // Делим как натуральные числа большее (преобразованное в целое) на меньшее
 	result.sign = z.sign; // Присваиваем знаку результата знак большего числа
 	if (!POZ_Z_D(result)) // Если результат равен нулю
