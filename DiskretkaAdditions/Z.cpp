@@ -7,12 +7,6 @@ Z::Z() : number(), sign(true) {
 
 }
 
-Z::Z(const int num) : Z() {
-	N temp(abs(num));
-	number = temp;
-	sign = num >= 0;
-}
-
 Z::Z(const std::string str) : Z() {
 	ZRecognizer recognizer(str);
 	bool status = recognizer.GetStatus();

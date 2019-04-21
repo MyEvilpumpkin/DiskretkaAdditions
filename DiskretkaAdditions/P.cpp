@@ -7,11 +7,6 @@ P::P() : coefficients(nullptr), power(0) {
 
 }
 
-P::P(const int num) : P() {
-	coefficients = new Q[1];
-	coefficients[0] = Q(num);
-}
-
 P::P(const std::string str) : P() {
 	PRecognizer recognizer(str);
 	bool status = recognizer.GetStatus();

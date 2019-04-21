@@ -7,23 +7,6 @@ N::N() : digits(nullptr), size((size_t)0) {
 
 }
 
-N::N(const unsigned int num) : N() {
-	int len = 0, temp = num;
-	while (temp > 0) {
-		temp = temp / 10;
-		len++;
-	}
-	if (!len)
-		len++;
-	size = len;
-	temp = num;
-	digits = new digit[len];
-	for (int i = len - 1; i >= 0; i--) {
-		digits[len - 1 - i] = temp % 10;
-		temp /= 10;
-	}
-}
-
 N::N(const std::string str) : N() {
 	NRecognizer recognizer(str);
 	bool status = recognizer.GetStatus();

@@ -13,7 +13,6 @@ class N : public SpecialType {
 public:
 	// Конструкторы и деструкторы
 	N();                   // Конструктор по умолчанию
-	N(const unsigned int); // Конструктор преобразования unsigned int в N (только для дебага)
 	N(const std::string);  // Конструктор преобразования std::string в N
 	N(const N&);           // Конструктор копирования
 	N(N&&) noexcept;       // Конструктор копирования с переносом

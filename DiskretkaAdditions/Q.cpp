@@ -7,12 +7,6 @@ Q::Q() : numerator(), denominator() {
 
 }
 
-Q::Q(const int num) : Q() {
-	Z temp(num);
-	numerator = temp;
-	denominator.SetOne();
-}
-
 Q::Q(const std::string str) : Q() {
 	QRecognizer recognizer(str);
 	bool status = recognizer.GetStatus();
