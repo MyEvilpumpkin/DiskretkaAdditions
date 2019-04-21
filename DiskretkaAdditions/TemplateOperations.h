@@ -7,11 +7,11 @@ T* renew(T*& obj, const size_t oldSize, const size_t newSize) {
 		T* newObj;
 		if (newSize > 0) {
 			newObj = new T[newSize];
-			if (oldSize > 0)
-				if (oldSize < newSize)
-					memcpy(newObj, obj, oldSize * sizeof(T));
-				else
-					memcpy(newObj, obj, newSize * sizeof(T));
+			if (oldSize > 0) {
+				size_t size = oldSize < newSize ? oldSize : newSize;
+				for (size_t i = 0; i < size; i++)
+					newObj[i] = std::move(obj[i]);
+			}
 		}
 		else
 			newObj = nullptr;
