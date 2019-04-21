@@ -43,6 +43,7 @@ public:
 
 	// Дружественные классы
 	friend class Q;
+	friend class P;
 };
 
 // Модули

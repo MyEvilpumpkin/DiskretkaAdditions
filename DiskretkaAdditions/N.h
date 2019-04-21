@@ -50,6 +50,7 @@ public:
 	// Дружественные классы
 	friend class Z;
 	friend class Q;
+	friend class P;
 };
 
 // Модули

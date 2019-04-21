@@ -38,6 +38,9 @@ public:
 	friend Q SUB_QQ_Q(const Q&, const Q&); // Q-6
 	friend Q MUL_QQ_Q(const Q&, const Q&); // Q-7
 	friend Q DIV_QQ_Q(const Q&, const Q&); // Q-8
+
+	// Дружественные классы
+	friend class P;
 };
 
 // Модули
