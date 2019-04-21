@@ -204,6 +204,8 @@ Z DIV_ZN_Z(const Z& z, const N& n) {
 	Z result;
 	if (n.IsZero())
 		throw DivisionByZero();
+	if (COM_NN_D(z.number, n) == 1)
+		throw DivisionByMore();
 	result.number = DIV_NN_N(z.number, n); // Делим как натуральные числа большее (преобразованное в целое) на меньшее
 	result.sign = z.sign; // Присваиваем знаку результата знак большего числа
 	if (!POZ_Z_D(result)) // Если результат равен нулю

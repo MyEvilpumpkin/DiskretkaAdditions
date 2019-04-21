@@ -222,7 +222,8 @@ N ADD_NN_N(const N& n1, const N& n2) {
 N SUB_NN_N(const N& n1, const N& n2) {
 	N result;
 	bool temp = false;
-	if (COM_NN_D(n1, n2) == 2) { // Проверка на правильность введенных данных
+	int com = COM_NN_D(n1, n2);
+	if (com == 2) { // Проверка на правильность введенных данных
 		result.digits = new digit[n1.size]; // Выделение памяти под очередную цифру результата
 		result.size = n1.size;
 		for (size_t i = 0; i < n1.size; i++) { // Цикл до конца числа
@@ -246,6 +247,8 @@ N SUB_NN_N(const N& n1, const N& n2) {
 		}
 		result.Normalize(); // Отбрасываем образовавшиеся незначащие нули
 	}
+	else if (com == 1)
+		throw SubtractionError();
 	else
 		result.SetZero();
 	return result;
@@ -306,8 +309,11 @@ N MUL_NN_N(const N& n1, const N& n2) {
 // N-9
 N SUB_NDN_N(const N& n1, const int d, const N& n2) {
 	N result;
-	if (COM_NN_D(n1, n2) == 2) // Если первое число больше второго
+	int com = COM_NN_D(n1, n2);
+	if (com == 2) // Если первое число больше второго
 		result = SUB_NN_N(n1, MUL_ND_N(n2, d)); // Вычитаем из большего числа меньшее (домноженное на цифру)
+	else if (com == 1)
+		throw SubtractionError();
 	else 
 		result = SUB_NN_N(n2, MUL_ND_N(n1, d)); // Вычитаем из большего числа меньшее (домноженное на цифру)
 	return result;
