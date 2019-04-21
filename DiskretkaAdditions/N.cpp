@@ -76,9 +76,9 @@ N::~N() {
 }
 
 N& N::operator=(const N& n) {
-	delete[] digits;
-	size = 0;
 	if (this != &n) {
+		delete[] digits;
+		size = 0;
 		if (n.size) {
 			size = n.size;
 			digits = new digit[size];
@@ -89,9 +89,9 @@ N& N::operator=(const N& n) {
 }
 
 N& N::operator=(N&& n) noexcept {
-	delete[] digits;
-	size = 0;
 	if (this != &n) {
+		delete[] digits;
+		size = 0;
 		size = n.size;
 		n.size = 0;
 		digits = n.digits;
