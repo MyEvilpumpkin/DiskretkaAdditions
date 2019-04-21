@@ -185,30 +185,30 @@ N ADD_1N_N(const N& n) {
 N ADD_NN_N(const N& n1, const N& n2) {
 	N result;
 	bool temp = false;
-	N first, second;
+	const N* first,* second;
 	if (COM_NN_D(n1, n2) == 2) { // Если n1>n2
-		first = n1;
-		second = n2;
+		first = &n1;
+		second = &n2;
 	}
 	else { // Если n1<n2
-		first = n2;
-		second = n1;
+		first = &n2;
+		second = &n1;
 	}
-	result.digits = new digit[first.size];
-	result.size = first.size;
-	for (size_t i = 0; i < first.size; i++) {
-		if (i < second.size) {
-			result.digits[i] = first.digits[i] + second.digits[i] + temp; // Складываем соответствующие разряды
+	result.digits = new digit[first->size];
+	result.size = first->size;
+	for (size_t i = 0; i < first->size; i++) {
+		if (i < second->size) {
+			result.digits[i] = first->digits[i] + second->digits[i] + temp; // Складываем соответствующие разряды
 			temp = result.digits[i] > 9;
 			result.digits[i] %= 10; // Определяем разряд
 		}
 		else if (temp) {
-			result.digits[i] = first.digits[i] + temp; // Присваиваем соответствующие разряды
+			result.digits[i] = first->digits[i] + temp; // Присваиваем соответствующие разряды
 			temp = result.digits[i] > 9;
 			result.digits[i] %= 10; // Определяем разряд
 		}
 		else
-			result.digits[i] = first.digits[i];
+			result.digits[i] = first->digits[i];
 	}
 	if (temp) { // Создаем разряд, если нужно
 		renew<digit>(result.digits, result.size, result.size + 1);
@@ -317,25 +317,25 @@ N SUB_NDN_N(const N& n1, const int d, const N& n2) {
 int DIV_NN_Dk(const N& n1, const N& n2, int& k) {
 	int result = 1, flag;
 	k = 0;
-	N first, second;
+	const N* first,* second;
 	int com = COM_NN_D(n1, n2);
 	if (com == 2) { // Если делимое - первое число
-		first = n1;
-		second = n2;
+		first = &n1;
+		second = &n2;
 	}
 	else { // Если делимое - второе число
-		first = n2;
-		second = n1;
+		first = &n2;
+		second = &n1;
 	}
-	if (second.IsZero())
+	if (second->IsZero())
 		throw DivisionByZero();
 	if (com) {
-		k = (int)(first.size - second.size);
-		N temp = MUL_Nk_N(second, k);
-		if (COM_NN_D(first, temp) == 1)
-			temp = MUL_Nk_N(second, --k); // Вычисляем наибольшее произведение делителя и 10^k, меньшее делимого
+		k = (int)(first->size - second->size);
+		N temp = MUL_Nk_N(*second, k);
+		if (COM_NN_D(*first, temp) == 1)
+			temp = MUL_Nk_N(*second, --k); // Вычисляем наибольшее произведение делителя и 10^k, меньшее делимого
 		do
-			flag = COM_NN_D(first, MUL_ND_N(temp, ++result)); // Вычисляем произведение на цифру и сравниваем его с делимым
+			flag = COM_NN_D(*first, MUL_ND_N(temp, ++result)); // Вычисляем произведение на цифру и сравниваем его с делимым
 		while (flag != 1);
 		result--; // Аналогично значению степени
 	}
@@ -346,30 +346,30 @@ int DIV_NN_Dk(const N& n1, const N& n2, int& k) {
 N DIV_NN_N(const N& n1, const N& n2) {
 	N result; // Частное от деления
 	result.SetZero();
-	N first, second;
+	const N* first,* second;
 	int com = COM_NN_D(n1, n2);
 	if (com == 2) {
-		first = n1;
-		second = n2;
+		first = &n1;
+		second = &n2;
 	}
 	else {
-		first = n2;
-		second = n1;
+		first = &n2;
+		second = &n1;
 	}
-	if (second.IsZero())
+	if (second->IsZero())
 		throw DivisionByZero();
 	if (com) {
-		N part = first; // Временный остаток от деления
+		N part = *first; // Временный остаток от деления
 		int k = 0;
-		if (NZER_N_B(second))
+		if (NZER_N_B(*second))
 			do {
 				N tempRes; // Cоздание произведения первой цифры деления на 10^k
 				tempRes.SetZero();
-				tempRes.digits[0] = DIV_NN_Dk(part, second, k); // Вычисляем первую цифру и степень десятки при делении
+				tempRes.digits[0] = DIV_NN_Dk(part, *second, k); // Вычисляем первую цифру и степень десятки при делении
 				N temp = MUL_Nk_N(tempRes, k); // Умножаем на 10^k
 				result = ADD_NN_N(result, temp); // Умножаем на 10^k и добавляем временный результат к общему
-				part = SUB_NN_N(part, MUL_NN_N(temp, second)); // Вычисление временного остатка
-			} while (COM_NN_D(part, second) != 1);
+				part = SUB_NN_N(part, MUL_NN_N(temp, *second)); // Вычисление временного остатка
+			} while (COM_NN_D(part, *second) != 1);
 	}
 	else
 		result.digits[0] = 1;
