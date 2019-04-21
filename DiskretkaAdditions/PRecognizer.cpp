@@ -1,24 +1,5 @@
 #include "PRecognizer.h"
 
-using namespace std;
-
-/*
-<polyn>::=<first_part><other_part>
-<first_part>::=<sign_or_nothing><value>
-<sign_or_nothing>::=<sign>|_/\_
-<sign>::=+|-
-<value>::=<coef><mul><x>
-<coef>::=<num>|_/\_
-<num>::=<first_digit><other_digit>|0
-<first_digit>::=1|2|3|4|5|6|7|8|9
-<other_digit>::=<digit><other_digit>|_/\_
-<digit>::=0|1|2|3|4|5|6|7|8|9
-<mul>::=*|_/\_
-<x>::=x<power>|_/\_
-<power>::=^<num>|_/\_
-<other_part>::=<sign><value><other_part>|\0
-*/
-
 bool PRecognizer::_polyn() {
 	bool isCorrect = true;
 	if (isCorrect)
@@ -178,3 +159,4 @@ bool PRecognizer::_other_part() {
 		isCorrect = false;
 	return isCorrect;
 }
+

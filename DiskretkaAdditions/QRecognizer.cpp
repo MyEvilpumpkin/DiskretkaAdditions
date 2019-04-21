@@ -1,7 +1,5 @@
 #include "QRecognizer.h"
 
-using namespace std;
-
 bool QRecognizer::_q() {
 	bool isCorrect = true;
 	if (str[pos] == '+' || str[pos] == '-')
@@ -76,3 +74,4 @@ bool QRecognizer::_digit() {
 		isCorrect = false;
 	return isCorrect;
 }
+

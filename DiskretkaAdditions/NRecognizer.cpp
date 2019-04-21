@@ -41,3 +41,4 @@ bool NRecognizer::_digit() {
 		isCorrect = false;
 	return isCorrect;
 }
+

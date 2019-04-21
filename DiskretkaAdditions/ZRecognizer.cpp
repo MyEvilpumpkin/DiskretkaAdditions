@@ -1,7 +1,5 @@
 #include "ZRecognizer.h"
 
-using namespace std;
-
 bool ZRecognizer::_z() {
 	bool isCorrect = true;
 	if (str[pos] == '+' || str[pos] == '-')
@@ -45,3 +43,4 @@ bool ZRecognizer::_digit() {
 		isCorrect = false;
 	return isCorrect;
 }
+

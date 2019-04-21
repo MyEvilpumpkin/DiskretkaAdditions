@@ -141,6 +141,7 @@
     <ClInclude Include="PRecognizer.h" />
     <ClInclude Include="Q.h" />
     <ClInclude Include="QRecognizer.h" />
+    <ClInclude Include="Recognizer.h" />
     <ClInclude Include="SpecialType.h" />
     <ClInclude Include="TemplateOperations.h" />
     <ClInclude Include="Z.h" />
