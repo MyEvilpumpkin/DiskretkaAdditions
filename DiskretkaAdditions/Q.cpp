@@ -157,7 +157,7 @@ Z TRANS_Q_Z(Q& q) {
 }
 
 // Q-5
-Q ADD_QQ_Q(Q& q1, Q& q2) {
+Q ADD_QQ_Q(const Q& q1, const Q& q2) {
 	Q result;
 	result.denominator = MUL_NN_N(q1.denominator, q2.denominator); // Ќаходим произведение и записываем в знаменатель
 	result.numerator = ADD_ZZ_Z(MUL_ZZ_Z(q1.numerator, TRANS_N_Z(q2.denominator)), MUL_ZZ_Z(q2.numerator, TRANS_N_Z(q1.denominator))); 
@@ -165,7 +165,7 @@ Q ADD_QQ_Q(Q& q1, Q& q2) {
 }
 
 // Q-6
-Q SUB_QQ_Q(Q& q1, Q& q2) {
+Q SUB_QQ_Q(const Q& q1, const Q& q2) {
 	Q result;
 	result.denominator = MUL_NN_N(q1.denominator, q2.denominator); // Ќаходим произведение и записываем в знаменатель
 	result.numerator = SUB_ZZ_Z(MUL_ZZ_Z(q1.numerator, TRANS_N_Z(q2.denominator)), MUL_ZZ_Z(q2.numerator, TRANS_N_Z(q1.denominator)));
@@ -173,7 +173,7 @@ Q SUB_QQ_Q(Q& q1, Q& q2) {
 }
 
 // Q-7
-Q MUL_QQ_Q(Q& q1, Q& q2) {
+Q MUL_QQ_Q(const Q& q1, const Q& q2) {
 	Q result;
 	result.denominator = MUL_NN_N(q1.denominator, q2.denominator); // ѕеремножаем числители
 	result.numerator = MUL_ZZ_Z(q1.numerator, q2.numerator); // ѕеремножаем знаменатели
@@ -181,7 +181,7 @@ Q MUL_QQ_Q(Q& q1, Q& q2) {
 }
 
 // Q-8
-Q DIV_QQ_Q(Q& q1, Q& q2) {
+Q DIV_QQ_Q(const Q& q1, const Q& q2) {
 	Q result;
 	if (q2.IsZero())
 		throw DivisionByZero();
