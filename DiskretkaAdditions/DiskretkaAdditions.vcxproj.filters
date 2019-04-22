@@ -13,34 +13,58 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Исходные файлы\N">
+      <UniqueIdentifier>{a4d0680c-e510-4692-81d2-7da5e8c6ab09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Z">
+      <UniqueIdentifier>{347bc938-f806-4783-b131-6a237798b9e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Q">
+      <UniqueIdentifier>{12e17e11-efbb-44ca-8b75-6a71aaa3fa65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\P">
+      <UniqueIdentifier>{04a4c26a-d143-46fd-b426-fdf09dc6ed62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\N">
+      <UniqueIdentifier>{bd34e5ec-9b64-447d-9055-ccebebaa04b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Z">
+      <UniqueIdentifier>{8f606740-f2a9-4df0-b1ff-f593601bbb8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Q">
+      <UniqueIdentifier>{e2ea0b44-dc9f-460d-81d2-e53195a3e129}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\P">
+      <UniqueIdentifier>{9161f6ea-b5a3-4f07-816a-cd305acf101a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="NRecognizer.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="N.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\N</Filter>
+    </ClCompile>
+    <ClCompile Include="NRecognizer.cpp">
+      <Filter>Исходные файлы\N</Filter>
     </ClCompile>
     <ClCompile Include="ZRecognizer.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\Z</Filter>
     </ClCompile>
     <ClCompile Include="Z.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="QRecognizer.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\Z</Filter>
     </ClCompile>
     <ClCompile Include="Q.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\Q</Filter>
+    </ClCompile>
+    <ClCompile Include="QRecognizer.cpp">
+      <Filter>Исходные файлы\Q</Filter>
     </ClCompile>
     <ClCompile Include="PRecognizer.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\P</Filter>
     </ClCompile>
     <ClCompile Include="P.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\P</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -53,32 +77,32 @@
     <ClInclude Include="TemplateOperations.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="NRecognizer.h">
+    <ClInclude Include="Recognizer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="N.h">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>Файлы заголовков\N</Filter>
     </ClInclude>
-    <ClInclude Include="ZRecognizer.h">
-      <Filter>Файлы заголовков</Filter>
+    <ClInclude Include="NRecognizer.h">
+      <Filter>Файлы заголовков\N</Filter>
     </ClInclude>
     <ClInclude Include="Z.h">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>Файлы заголовков\Z</Filter>
     </ClInclude>
-    <ClInclude Include="QRecognizer.h">
-      <Filter>Файлы заголовков</Filter>
+    <ClInclude Include="ZRecognizer.h">
+      <Filter>Файлы заголовков\Z</Filter>
     </ClInclude>
     <ClInclude Include="Q.h">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>Файлы заголовков\Q</Filter>
     </ClInclude>
-    <ClInclude Include="PRecognizer.h">
-      <Filter>Файлы заголовков</Filter>
+    <ClInclude Include="QRecognizer.h">
+      <Filter>Файлы заголовков\Q</Filter>
     </ClInclude>
     <ClInclude Include="P.h">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>Файлы заголовков\P</Filter>
     </ClInclude>
-    <ClInclude Include="Recognizer.h">
-      <Filter>Файлы заголовков</Filter>
+    <ClInclude Include="PRecognizer.h">
+      <Filter>Файлы заголовков\P</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
