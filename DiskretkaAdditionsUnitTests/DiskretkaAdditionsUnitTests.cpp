@@ -116,4 +116,77 @@ namespace DiskretkaAdditionsUnitTests {
 			Assert::AreEqual(N("12").ToString(), LCM_NN_N(N("4"), N("6")).ToString(), L"Test 6");
 		}
 	};
+	TEST_CLASS(ZTests) {
+	public:
+		TEST_METHOD(Z_1_ABS_Z_N_Tests) {
+			Assert::AreEqual(N("0").ToString(), ABS_Z_N(Z("0")).ToString(), L"Test 1");
+			Assert::AreEqual(N("9").ToString(), ABS_Z_N(Z("-9")).ToString(), L"Test 2");
+			Assert::AreEqual(N("100").ToString(), ABS_Z_N(Z("100")).ToString(), L"Test 3");
+		}
+		TEST_METHOD(Z_2_POZ_Z_D_Tests) {
+			Assert::AreEqual(0, POZ_Z_D(Z("0")), L"Test 1");
+			Assert::AreEqual(1, POZ_Z_D(Z("-5")), L"Test 2");
+			Assert::AreEqual(2, POZ_Z_D(Z("10")), L"Test 3");
+		}
+		TEST_METHOD(Z_3_MUL_ZM_Z_Tests) {
+			Assert::AreEqual(Z("0").ToString(), MUL_ZM_Z(Z("0")).ToString(), L"Test 1");
+			Assert::AreEqual(Z("9").ToString(), MUL_ZM_Z(Z("-9")).ToString(), L"Test 2");
+			Assert::AreEqual(Z("-100").ToString(), MUL_ZM_Z(Z("100")).ToString(), L"Test 3");
+		}
+		TEST_METHOD(Z_4_TRANS_N_Z_Tests) {
+			Assert::AreEqual(Z("0").ToString(), TRANS_N_Z(N("0")).ToString(), L"Test 1");
+			Assert::AreEqual(Z("9").ToString(), TRANS_N_Z(N("9")).ToString(), L"Test 2");
+			Assert::AreEqual(Z("100").ToString(), TRANS_N_Z(N("100")).ToString(), L"Test 3");
+		}
+		TEST_METHOD(Z_5_TRANS_Z_N_Tests) {
+			Assert::AreEqual(N("0").ToString(), TRANS_Z_N(Z("0")).ToString(), L"Test 1");
+			Assert::AreEqual(N("9").ToString(), TRANS_Z_N(Z("-9")).ToString(), L"Test 2");
+			Assert::AreEqual(N("100").ToString(), TRANS_Z_N(Z("100")).ToString(), L"Test 3");
+		}
+		TEST_METHOD(Z_6_ADD_ZZ_Z_Tests) {
+			Assert::AreEqual(Z("0").ToString(), ADD_ZZ_Z(Z("0"), Z("0")).ToString(), L"Test 1");
+			Assert::AreEqual(Z("10").ToString(), ADD_ZZ_Z(Z("0"), Z("10")).ToString(), L"Test 2");
+			Assert::AreEqual(Z("-100").ToString(), ADD_ZZ_Z(Z("-100"), Z("0")).ToString(), L"Test 3");
+			Assert::AreEqual(Z("20").ToString(), ADD_ZZ_Z(Z("10"), Z("10")).ToString(), L"Test 4");
+			Assert::AreEqual(Z("-100").ToString(), ADD_ZZ_Z(Z("-1"), Z("-99")).ToString(), L"Test 5");
+			Assert::AreEqual(Z("0").ToString(), ADD_ZZ_Z(Z("999"), Z("-999")).ToString(), L"Test 6");
+			Assert::AreEqual(Z("1010").ToString(), ADD_ZZ_Z(Z("999"), Z("11")).ToString(), L"Test 7");
+		}
+		TEST_METHOD(Z_7_SUB_ZZ_Z_Tests) {
+			Assert::AreEqual(Z("0").ToString(), SUB_ZZ_Z(Z("0"), Z("0")).ToString(), L"Test 1");
+			Assert::AreEqual(Z("-10").ToString(), SUB_ZZ_Z(Z("0"), Z("10")).ToString(), L"Test 2");
+			Assert::AreEqual(Z("-100").ToString(), SUB_ZZ_Z(Z("-100"), Z("0")).ToString(), L"Test 3");
+			Assert::AreEqual(Z("0").ToString(), SUB_ZZ_Z(Z("10"), Z("10")).ToString(), L"Test 4");
+			Assert::AreEqual(Z("98").ToString(), SUB_ZZ_Z(Z("-1"), Z("-99")).ToString(), L"Test 5");
+			Assert::AreEqual(Z("1000").ToString(), SUB_ZZ_Z(Z("999"), Z("-1")).ToString(), L"Test 6");
+			Assert::AreEqual(Z("0").ToString(), SUB_ZZ_Z(Z("-11"), Z("-11")).ToString(), L"Test 7");
+		}
+		TEST_METHOD(Z_8_MUL_ZZ_Z_Tests) {
+			Assert::AreEqual(Z("0").ToString(), MUL_ZZ_Z(Z("0"), Z("0")).ToString(), L"Test 1");
+			Assert::AreEqual(Z("0").ToString(), MUL_ZZ_Z(Z("0"), Z("10")).ToString(), L"Test 2");
+			Assert::AreEqual(Z("0").ToString(), MUL_ZZ_Z(Z("-100"), Z("0")).ToString(), L"Test 3");
+			Assert::AreEqual(Z("-100").ToString(), MUL_ZZ_Z(Z("10"), Z("-10")).ToString(), L"Test 4");
+			Assert::AreEqual(Z("99").ToString(), MUL_ZZ_Z(Z("-1"), Z("-99")).ToString(), L"Test 5");
+			Assert::AreEqual(Z("-999").ToString(), MUL_ZZ_Z(Z("999"), Z("-1")).ToString(), L"Test 6");
+			Assert::AreEqual(Z("121").ToString(), MUL_ZZ_Z(Z("11"), Z("11")).ToString(), L"Test 7");
+		}
+		TEST_METHOD(Z_9_DIV_ZN_Z_Tests) {
+			Assert::AreEqual(Z("-2").ToString(), DIV_ZN_Z(Z("-2"), N("1")).ToString(), L"Test 1");
+			Assert::AreEqual(Z("2").ToString(), DIV_ZN_Z(Z("4"), N("2")).ToString(), L"Test 2");
+			Assert::AreEqual(Z("3").ToString(), DIV_ZN_Z(Z("10"), N("3")).ToString(), L"Test 3");
+			Assert::AreEqual(Z("-4").ToString(), DIV_ZN_Z(Z("-11"), N("3")).ToString(), L"Test 4");
+			Assert::AreEqual(Z("1").ToString(), DIV_ZN_Z(Z("100"), N("99")).ToString(), L"Test 5");
+			Assert::AreEqual(Z("5").ToString(), DIV_ZN_Z(Z("25"), N("5")).ToString(), L"Test 6");
+			Assert::AreEqual(Z("10").ToString(), DIV_ZN_Z(Z("100"), N("10")).ToString(), L"Test 7");
+		}
+		TEST_METHOD(Z_10_MOD_ZN_Z_Tests) {
+			Assert::AreEqual(Z("0").ToString(), MOD_ZN_Z(Z("-2"), N("1")).ToString(), L"Test 1");
+			Assert::AreEqual(Z("0").ToString(), MOD_ZN_Z(Z("4"), N("2")).ToString(), L"Test 2");
+			Assert::AreEqual(Z("1").ToString(), MOD_ZN_Z(Z("10"), N("3")).ToString(), L"Test 3");
+			Assert::AreEqual(Z("1").ToString(), MOD_ZN_Z(Z("-11"), N("3")).ToString(), L"Test 4");
+			Assert::AreEqual(Z("1").ToString(), MOD_ZN_Z(Z("100"), N("99")).ToString(), L"Test 5");
+			Assert::AreEqual(Z("0").ToString(), MOD_ZN_Z(Z("25"), N("5")).ToString(), L"Test 6");
+			Assert::AreEqual(Z("5").ToString(), MOD_ZN_Z(Z("17"), N("6")).ToString(), L"Test 7");
+		}
+	};
 }
