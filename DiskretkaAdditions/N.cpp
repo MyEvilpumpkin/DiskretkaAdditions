@@ -293,12 +293,7 @@ N MUL_NN_N(const N& n1, const N& n2) {
 N SUB_NDN_N(const N& n1, const int d, const N& n2) {
 	N result;
 	int com = COM_NN_D(n1, n2);
-	if (com == 2) // Если первое число больше второго
-		result = SUB_NN_N(n1, MUL_ND_N(n2, d)); // Вычитаем из большего числа меньшее (домноженное на цифру)
-	else if (com == 1)
-		throw SubtractionError();
-	else 
-		result = SUB_NN_N(n2, MUL_ND_N(n1, d)); // Вычитаем из большего числа меньшее (домноженное на цифру)
+	result = SUB_NN_N(n1, MUL_ND_N(n2, d)); // Вычитаем из первого числа второе (домноженное на цифру)
 	return result;
 }
 
