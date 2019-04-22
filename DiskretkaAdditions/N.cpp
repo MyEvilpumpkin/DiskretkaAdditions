@@ -238,8 +238,10 @@ N SUB_NN_N(const N& n1, const N& n2) {
 }
 
 // N-6
-N MUL_ND_N(const N& n, const int d) {
+N MUL_ND_N(const N& n, const unsigned int d) {
 	N result;
+	if (d > 9)
+		throw NotADigit();
 	if (!d)
 		result.SetZero();
 	else if (d == 1)
@@ -290,8 +292,10 @@ N MUL_NN_N(const N& n1, const N& n2) {
 }
 
 // N-9
-N SUB_NDN_N(const N& n1, const int d, const N& n2) {
+N SUB_NDN_N(const N& n1, const unsigned int d, const N& n2) {
 	N result;
+	if (d > 9)
+		throw NotADigit();
 	int com = COM_NN_D(n1, n2);
 	result = SUB_NN_N(n1, MUL_ND_N(n2, d)); // Вычитаем из первого числа второе (домноженное на цифру)
 	return result;
@@ -320,8 +324,9 @@ int DIV_NN_Dk(const N& n1, const N& n2, int& k) {
 			temp = MUL_Nk_N(*second, --k); // Вычисляем наибольшее произведение делителя и 10^k, меньшее делимого
 		do
 			flag = COM_NN_D(*first, MUL_ND_N(temp, ++result)); // Вычисляем произведение на цифру и сравниваем его с делимым
-		while (flag != 1);
-		result--; // Аналогично значению степени
+		while (flag != 1 && result < 9);
+		if (flag == 1)
+			result--; // Аналогично значению степени
 	}
 	return result;
 }

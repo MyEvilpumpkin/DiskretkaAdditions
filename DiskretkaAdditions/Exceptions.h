@@ -26,6 +26,11 @@ public:
 	DivisionByMore() : ArithmeticalError("Ошибка: Попытка деления меньшего целого (по модулю) на большее натуральное") { }
 };
 
+class NotADigit : public ArithmeticalError {
+public:
+	NotADigit() : ArithmeticalError("Ошибка: Попытка умножения на число, а не на цифру") { }
+};
+
 class Error : public std::exception {
 public:
 	Error(const char* str) : std::exception(str) { }
