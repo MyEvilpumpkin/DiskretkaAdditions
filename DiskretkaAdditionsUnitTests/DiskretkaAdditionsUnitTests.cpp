@@ -189,4 +189,63 @@ namespace DiskretkaAdditionsUnitTests {
 			Assert::AreEqual(Z("5").ToString(), MOD_ZN_Z(Z("17"), N("6")).ToString(), L"Test 7");
 		}
 	};
+	TEST_CLASS(QTests) {
+	public:
+		TEST_METHOD(Q_1_RED_Q_Q_Tests) {
+			Assert::AreEqual(Q("0").ToString(), RED_Q_Q(Q("0")).ToString(), L"Test 1");
+			Assert::AreEqual(Q("-3").ToString(), RED_Q_Q(Q("-9/3")).ToString(), L"Test 2");
+			Assert::AreEqual(Q("17/13").ToString(), RED_Q_Q(Q("17/13")).ToString(), L"Test 3");
+		}
+		TEST_METHOD(Q_2_INT_Q_B_Tests) {
+			Assert::AreEqual(true, INT_Q_B(Q("0")), L"Test 1");
+			Assert::AreEqual(false, INT_Q_B(Q("-5/7")), L"Test 2");
+			Assert::AreEqual(true, INT_Q_B(Q("27/9")), L"Test 3");
+		}
+		TEST_METHOD(Q_3_TRANS_Z_Q_Tests) {
+			Assert::AreEqual(Q("0").ToString(), TRANS_Z_Q(Z("0")).ToString(), L"Test 1");
+			Assert::AreEqual(Q("-9").ToString(), TRANS_Z_Q(Z("-9")).ToString(), L"Test 2");
+			Assert::AreEqual(Z("100").ToString(), TRANS_Z_Q(Z("100")).ToString(), L"Test 3");
+		}
+		TEST_METHOD(Q_4_TRANS_Q_Z_Tests) {
+			Assert::AreEqual(Z("0").ToString(), TRANS_Q_Z(Q("0")).ToString(), L"Test 1");
+			Assert::AreEqual(Z("-3").ToString(), TRANS_Q_Z(Q("-9/3")).ToString(), L"Test 2");
+			Assert::AreEqual(Z("27").ToString(), TRANS_Q_Z(Q("27")).ToString(), L"Test 3");
+		}
+		TEST_METHOD(Q_5_ADD_QQ_Q_Tests) {
+			Assert::AreEqual(Q("0").ToString(), ADD_QQ_Q(Q("0"), Q("0")).ToString(), L"Test 1");
+			Assert::AreEqual(Q("-10/7").ToString(), ADD_QQ_Q(Q("0"), Q("-10/7")).ToString(), L"Test 2");
+			Assert::AreEqual(Q("0").ToString(), ADD_QQ_Q(Q("-100/7"), Q("100/7")).ToString(), L"Test 3");
+			Assert::AreEqual(Q("20/3").ToString(), ADD_QQ_Q(Q("10/3"), Q("10/3")).ToString(), L"Test 4");
+			Assert::AreEqual(Q("-100").ToString(), ADD_QQ_Q(Q("-1"), Q("-99")).ToString(), L"Test 5");
+			Assert::AreEqual(Q("999/10").ToString(), ADD_QQ_Q(Q("999/5"), Q("-999/10")).ToString(), L"Test 6");
+			Assert::AreEqual(Q("8/15").ToString(), ADD_QQ_Q(Q("1/3"), Q("1/5")).ToString(), L"Test 7");
+		}
+		TEST_METHOD(Q_6_SUB_QQ_Q_Tests) {
+			Assert::AreEqual(Q("0").ToString(), SUB_QQ_Q(Q("0"), Q("0")).ToString(), L"Test 1");
+			Assert::AreEqual(Q("10/7").ToString(), SUB_QQ_Q(Q("0"), Q("-10/7")).ToString(), L"Test 2");
+			Assert::AreEqual(Q("-200/7").ToString(), SUB_QQ_Q(Q("-100/7"), Q("100/7")).ToString(), L"Test 3");
+			Assert::AreEqual(Q("0").ToString(), SUB_QQ_Q(Q("10/3"), Q("10/3")).ToString(), L"Test 4");
+			Assert::AreEqual(Q("98").ToString(), SUB_QQ_Q(Q("-1"), Q("-99")).ToString(), L"Test 5");
+			Assert::AreEqual(Q("-999/10").ToString(), SUB_QQ_Q(Q("-999/5"), Q("-999/10")).ToString(), L"Test 6");
+			Assert::AreEqual(Q("2/15").ToString(), SUB_QQ_Q(Q("1/3"), Q("1/5")).ToString(), L"Test 7");
+		}
+		TEST_METHOD(Q_7_MUL_QQ_Q_Tests) {
+			Assert::AreEqual(Q("0").ToString(), MUL_QQ_Q(Q("0"), Q("0")).ToString(), L"Test 1");
+			Assert::AreEqual(Q("0").ToString(), MUL_QQ_Q(Q("0"), Q("-10/7")).ToString(), L"Test 2");
+			Assert::AreEqual(Q("-1").ToString(), MUL_QQ_Q(Q("-100/7"), Q("7/100")).ToString(), L"Test 3");
+			Assert::AreEqual(Q("100/9").ToString(), MUL_QQ_Q(Q("10/3"), Q("10/3")).ToString(), L"Test 4");
+			Assert::AreEqual(Q("99").ToString(), MUL_QQ_Q(Q("-1"), Q("-99")).ToString(), L"Test 5");
+			Assert::AreEqual(Q("555").ToString(), MUL_QQ_Q(Q("-999/5"), Q("-25/9")).ToString(), L"Test 6");
+			Assert::AreEqual(Q("1/15").ToString(), MUL_QQ_Q(Q("1/3"), Q("1/5")).ToString(), L"Test 7");
+		}
+		TEST_METHOD(Q_8_DIV_QQ_Q_Tests) {
+			Assert::AreEqual(Q("0").ToString(), DIV_QQ_Q(Q("0"), Q("1/7")).ToString(), L"Test 1");
+			Assert::AreEqual(Q("0").ToString(), DIV_QQ_Q(Q("0"), Q("-10/7")).ToString(), L"Test 2");
+			Assert::AreEqual(Q("-1").ToString(), DIV_QQ_Q(Q("-100/7"), Q("100/7")).ToString(), L"Test 3");
+			Assert::AreEqual(Q("1").ToString(), DIV_QQ_Q(Q("10/3"), Q("10/3")).ToString(), L"Test 4");
+			Assert::AreEqual(Q("1/99").ToString(), DIV_QQ_Q(Q("-1"), Q("-99")).ToString(), L"Test 5");
+			Assert::AreEqual(Q("555").ToString(), DIV_QQ_Q(Q("-999/5"), Q("-9/25")).ToString(), L"Test 6");
+			Assert::AreEqual(Q("5/3").ToString(), DIV_QQ_Q(Q("1/3"), Q("1/5")).ToString(), L"Test 7");
+		}
+	};
 }
