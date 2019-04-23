@@ -119,9 +119,11 @@ std::string Q::ToString() const {
 
 void Q::Normalize() {
 	N d = GCF_NN_N(numerator.number, denominator); // Присваиваем d значение НОДа (модуля числителя дроби) и знаменателя дроби 
-	while (!d.IsOne()) { // До тех пор пока d не станет равным 1  
-		numerator.number = DIV_NN_N(numerator.number, d); // Сокращаем числитель на d
-		denominator = DIV_NN_N(denominator, d); // Сокращаем знаменатель на d
+	while (!d.IsOne()) { // До тех пор пока d не станет равным 1
+		if (!numerator.IsZero())
+			numerator.number = DIV_NN_N(numerator.number, d); // Сокращаем числитель на d
+		if (!denominator.IsZero())
+			denominator = DIV_NN_N(denominator, d); // Сокращаем знаменатель на d
 		d = GCF_NN_N(numerator.number, denominator); // Присваиваем d значение НОДа (модуля числителя дроби) и знаменателя дроби  
 	}
 }
@@ -134,7 +136,7 @@ Q RED_Q_Q(Q& q) {
 
 // Q-2
 bool INT_Q_B(Q& q) {
-	return (RED_Q_Q(q).IsOne()); // Возвращаем истинность высказывания о том, что знаменатель дроби = 1
+	return (RED_Q_Q(q).denominator.IsOne()); // Возвращаем истинность высказывания о том, что знаменатель дроби = 1
 }
 
 // Q-3
@@ -182,7 +184,10 @@ Q DIV_QQ_Q(const Q& q1, const Q& q2) {
 	if (q1.IsZero()) // Eсли числитель = 0
 		result.SetZero();
 	else {
-		result.numerator = MUL_ZZ_Z(q1.numerator, TRANS_N_Z(q2.denominator)); // Присвоить числителю результата произведение первого числителя и второго знаменателя
+		if (POZ_Z_D(q2.numerator) == 1)
+			result.numerator = MUL_ZZ_Z(MUL_ZM_Z(q1.numerator), TRANS_N_Z(q2.denominator)); // Присвоить числителю результата произведение первого числителя и второго знаменателя
+		else
+			result.numerator = MUL_ZZ_Z(q1.numerator, TRANS_N_Z(q2.denominator)); // Присвоить числителю результата произведение первого числителя и второго знаменателя
 		result.denominator = MUL_NN_N(q1.denominator, TRANS_Z_N(q2.numerator)); // Присвоить знаменателю результата произведение первого знаменателя и второго числителя
 	}
 	return RED_Q_Q(result);
