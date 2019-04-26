@@ -232,7 +232,7 @@ P ADD_PP_P(const P& p1, const P& p2) {
 // P-2
 P SUB_PP_P(const P& p1, const P& p2) {
 	P result;
-	int maxPower = p1.power > p2.power ? p1.power : p2.power;
+	size_t maxPower = p1.power > p2.power ? p1.power : p2.power;
 	result.coefficients = new Q[maxPower + 1]; // Выделяем память для разности многочленов
 	result.power = maxPower; // Степень разности равна степени большего из многочленов
 	if (maxPower == p1.power)
@@ -266,7 +266,7 @@ P MUL_PQ_P(const P& p, const Q& q) {
 }
 
 // P-4
-P MUL_Pxk_P(const P& p, const unsigned int k) {
+P MUL_Pxk_P(const P& p, const int k) {
 	P result;
 	result.coefficients = new Q[p.power + k + 1]; // Выделение памяти
 	result.power = p.power + k; // Присваиваем степени многочлена-результата сумму степени исходного многочлена и степени k
@@ -364,7 +364,15 @@ P GCF_PP_P(const P& p1, const P& p2) {
 		else if (first.power < second.power)
 			second = MOD_PP_P(second, first);
 		else {
-			Q temp = LED_P_Q(SUB_PP_P(p1, p2));
+			Q q1 = LED_P_Q(p1);
+			Q zero;
+			zero.SetZero();
+			if (POZ_Z_D(TRANS_Q_Z(q1)) == 1)
+				q1 = SUB_QQ_Q(zero, q1);
+			Q q2 = LED_P_Q(p2);
+			if (POZ_Z_D(TRANS_Q_Z(q2)) == 1)
+				q2 = SUB_QQ_Q(zero, q2);
+			Q temp = SUB_QQ_Q(q1, q2);
 			if (POZ_Z_D(TRANS_Q_Z(temp)) != 1)
 				first = MOD_PP_P(first, second); // Присваиваем ему остаток от деления многочленов
 			else
@@ -374,6 +382,12 @@ P GCF_PP_P(const P& p1, const P& p2) {
 		result = first; // Присваиваем результату (остатку) значение первого многочлена
 	else
 		result = second; // Наоборот
+	Q temp = LED_P_Q(result);
+	if (POZ_Z_D(TRANS_Q_Z(temp)) == 1) {
+		P zero;
+		zero.SetZero();
+		result = SUB_PP_P(zero, result);
+	}
 	return result;
 }
 
