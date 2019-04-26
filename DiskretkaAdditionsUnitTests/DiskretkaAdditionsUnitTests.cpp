@@ -248,4 +248,115 @@ namespace DiskretkaAdditionsUnitTests {
 			Assert::AreEqual(Q("5/3").ToString(), DIV_QQ_Q(Q("1/3"), Q("1/5")).ToString(), L"Test 7");
 		}
 	};
+	TEST_CLASS(PTests) {
+	public:
+		TEST_METHOD(P_1_ADD_PP_P_Tests) {
+			Assert::AreEqual(P("0").ToString(), ADD_PP_P(P("0"), P("0")).ToString(), L"Test 1");
+			Assert::AreEqual(P("-10/7").ToString(), ADD_PP_P(P("0"), P("-10/7")).ToString(), L"Test 2");
+			Assert::AreEqual(P("0").ToString(), ADD_PP_P(P("-100/7"), P("100/7")).ToString(), L"Test 3");
+			Assert::AreEqual(P("20/3").ToString(), ADD_PP_P(P("10/3"), P("10/3")).ToString(), L"Test 4");
+			Assert::AreEqual(P("-100").ToString(), ADD_PP_P(P("-1"), P("-99")).ToString(), L"Test 5");
+			Assert::AreEqual(P("999/10").ToString(), ADD_PP_P(P("999/5"), P("-999/10")).ToString(), L"Test 6");
+			Assert::AreEqual(P("8/15").ToString(), ADD_PP_P(P("1/3"), P("1/5")).ToString(), L"Test 7");
+			Assert::AreEqual(P("2x^6 + x^5").ToString(), ADD_PP_P(P("x^5"), P("2x^6")).ToString(), L"Test 8");
+			Assert::AreEqual(P("5").ToString(), ADD_PP_P(P("-3x^5 + 5"), P("3x^5")).ToString(), L"Test 9");
+			Assert::AreEqual(P("0").ToString(), ADD_PP_P(P("-3x^5 + 5"), P("3x^5 - 5")).ToString(), L"Test 10");
+		}
+		TEST_METHOD(P_2_SUB_PP_P_Tests) {
+			Assert::AreEqual(P("0").ToString(), SUB_PP_P(P("0"), P("0")).ToString(), L"Test 1");
+			Assert::AreEqual(P("10/7").ToString(), SUB_PP_P(P("0"), P("-10/7")).ToString(), L"Test 2");
+			Assert::AreEqual(P("-200/7").ToString(), SUB_PP_P(P("-100/7"), P("100/7")).ToString(), L"Test 3");
+			Assert::AreEqual(P("0").ToString(), SUB_PP_P(P("10/3"), P("10/3")).ToString(), L"Test 4");
+			Assert::AreEqual(P("98").ToString(), SUB_PP_P(P("-1"), P("-99")).ToString(), L"Test 5");
+			Assert::AreEqual(P("-999/10").ToString(), SUB_PP_P(P("-999/5"), P("-999/10")).ToString(), L"Test 6");
+			Assert::AreEqual(P("2/15").ToString(), SUB_PP_P(P("1/3"), P("1/5")).ToString(), L"Test 7");
+			Assert::AreEqual(P("-2x^6 + x^5").ToString(), SUB_PP_P(P("x^5"), P("2x^6")).ToString(), L"Test 8");
+			Assert::AreEqual(P("5").ToString(), SUB_PP_P(P("3x^5 + 5"), P("3x^5")).ToString(), L"Test 9");
+			Assert::AreEqual(P("0").ToString(), SUB_PP_P(P("-3x^5 + 5"), P("-3x^5 + 5")).ToString(), L"Test 10");
+			Assert::AreEqual(P("3x^5").ToString(), SUB_PP_P(P("3x^5"), P("0")).ToString(), L"Test 11");
+		}
+		TEST_METHOD(P_3_MUL_PQ_P_Tests) {
+			Assert::AreEqual(P("0").ToString(), MUL_PQ_P(P("3x^10+6x+8"), Q("0")).ToString(), L"Test 1");
+			Assert::AreEqual(P("-5x^2-10x").ToString(), MUL_PQ_P(P("2x^2+4x"), Q("-5/2")).ToString(), L"Test 2");
+			Assert::AreEqual(P("0").ToString(), MUL_PQ_P(P("0"), Q("10")).ToString(), L"Test 3");
+		}
+		TEST_METHOD(P_4_MUL_Pxk_P_Tests) {
+			Assert::AreEqual(P("3x^10+6x+8").ToString(), MUL_Pxk_P(P("3x^10+6x+8"), 0).ToString(), L"Test 1");
+			Assert::AreEqual(P("2x^4+4x^3").ToString(), MUL_Pxk_P(P("2x^2+4x"), 2).ToString(), L"Test 2");
+			Assert::AreEqual(P("0").ToString(), MUL_Pxk_P(P("0"), 10).ToString(), L"Test 3");
+		}
+		TEST_METHOD(P_5_LED_P_Q_Tests) {
+			Assert::AreEqual(Q("3/4").ToString(), LED_P_Q(P("3/4x^10+6x+8")).ToString(), L"Test 1");
+			Assert::AreEqual(Q("2").ToString(), LED_P_Q(P("2x^2+4x")).ToString(), L"Test 2");
+			Assert::AreEqual(Q("0").ToString(), LED_P_Q(P("0")).ToString(), L"Test 3");
+		}
+		TEST_METHOD(P_6_DEG_P_N_Tests) {
+			Assert::AreEqual(N("10").ToString(), DEG_P_N(P("3x^10+6x+8")).ToString(), L"Test 1");
+			Assert::AreEqual(N("2").ToString(), DEG_P_N(P("2x^2+4x")).ToString(), L"Test 2");
+			Assert::AreEqual(N("0").ToString(), DEG_P_N(P("0")).ToString(), L"Test 3");
+		}
+		TEST_METHOD(P_7_FAC_P_Q_Tests) {
+			Assert::AreEqual(Q("3/4").ToString(), FAC_P_Q(P("3/4x^10+6/2x+9")).ToString(), L"Test 1");
+			Assert::AreEqual(Q("2").ToString(), FAC_P_Q(P("2x^2+4x")).ToString(), L"Test 2");
+			Assert::AreEqual(Q("0").ToString(), FAC_P_Q(P("0")).ToString(), L"Test 3");
+		}
+		TEST_METHOD(P_8_MUL_PP_P_Tests) {
+			Assert::AreEqual(P("0").ToString(), MUL_PP_P(P("0"), P("0")).ToString(), L"Test 1");
+			Assert::AreEqual(P("0").ToString(), MUL_PP_P(P("0"), P("-10/7")).ToString(), L"Test 2");
+			Assert::AreEqual(P("-1").ToString(), MUL_PP_P(P("-100/7"), P("7/100")).ToString(), L"Test 3");
+			Assert::AreEqual(P("100/9").ToString(), MUL_PP_P(P("10/3"), P("10/3")).ToString(), L"Test 4");
+			Assert::AreEqual(P("99").ToString(), MUL_PP_P(P("-1"), P("-99")).ToString(), L"Test 5");
+			Assert::AreEqual(P("555").ToString(), MUL_PP_P(P("-999/5"), P("-25/9")).ToString(), L"Test 6");
+			Assert::AreEqual(P("1/15").ToString(), MUL_PP_P(P("1/3"), P("1/5")).ToString(), L"Test 7");
+			Assert::AreEqual(P("12x^3+16/5x^2-7/2x").ToString(), MUL_PP_P(P("3x^2+4/5x-7/8"), P("4x")).ToString(), L"Test 8");
+			Assert::AreEqual(P("0").ToString(), MUL_PP_P(P("12x^3+16/5x^2-7/2x"), P("0")).ToString(), L"Test 9");
+			Assert::AreEqual(P("x^5").ToString(), MUL_PP_P(P("x^3"), P("x^2")).ToString(), L"Test 10");
+		}
+		TEST_METHOD(P_9_DIV_PP_P_Tests) {
+			Assert::AreEqual(P("0").ToString(), DIV_PP_P(P("0"), P("1/7")).ToString(), L"Test 1");
+			Assert::AreEqual(P("0").ToString(), DIV_PP_P(P("0"), P("-10/7")).ToString(), L"Test 2");
+			Assert::AreEqual(P("-1").ToString(), DIV_PP_P(P("-100/7"), P("100/7")).ToString(), L"Test 3");
+			Assert::AreEqual(P("1").ToString(), DIV_PP_P(P("10/3"), P("10/3")).ToString(), L"Test 4");
+			Assert::AreEqual(P("1/99").ToString(), DIV_PP_P(P("-1"), P("-99")).ToString(), L"Test 5");
+			Assert::AreEqual(P("555").ToString(), DIV_PP_P(P("-999/5"), P("-9/25")).ToString(), L"Test 6");
+			Assert::AreEqual(P("x").ToString(), DIV_PP_P(P("x^2"), P("x")).ToString(), L"Test 7");
+			Assert::AreEqual(P("x+4").ToString(), DIV_PP_P(P("x^2+5x+4"), P("x+1")).ToString(), L"Test 8");
+			Assert::AreEqual(P("x^5").ToString(), DIV_PP_P(P("5x^5"), P("5")).ToString(), L"Test 9");
+			Assert::AreEqual(P("x^3").ToString(), DIV_PP_P(P("x^5"), P("x^2")).ToString(), L"Test 10");
+		}
+		TEST_METHOD(P_10_MOD_PP_P_Tests) {
+			Assert::AreEqual(P("0").ToString(), MOD_PP_P(P("0"), P("1/7")).ToString(), L"Test 1");
+			Assert::AreEqual(P("0").ToString(), MOD_PP_P(P("0"), P("-10/7")).ToString(), L"Test 2");
+			Assert::AreEqual(P("-100/7").ToString(), MOD_PP_P(P("-100/7"), P("100/7x")).ToString(), L"Test 3");
+			Assert::AreEqual(P("10/3x").ToString(), MOD_PP_P(P("10/3x"), P("10/3x^3")).ToString(), L"Test 4");
+			Assert::AreEqual(P("0").ToString(), MOD_PP_P(P("-1"), P("-99")).ToString(), L"Test 5");
+			Assert::AreEqual(P("-x").ToString(), MOD_PP_P(P("-5x^3-x"), P("x^2")).ToString(), L"Test 6");
+			Assert::AreEqual(P("0").ToString(), MOD_PP_P(P("x^2"), P("x")).ToString(), L"Test 7");
+			Assert::AreEqual(P("0").ToString(), MOD_PP_P(P("x^2+5x+4"), P("x+1")).ToString(), L"Test 8");
+			Assert::AreEqual(P("3").ToString(), MOD_PP_P(P("5x^5+3"), P("5x^5")).ToString(), L"Test 9");
+			Assert::AreEqual(P("x+5").ToString(), MOD_PP_P(P("x^5+x^2+x+5"), P("x^2")).ToString(), L"Test 10");
+		}
+		TEST_METHOD(P_11_GCF_PP_P_Tests) {
+			Assert::AreEqual(P("1/7").ToString(), GCF_PP_P(P("0"), P("1/7")).ToString(), L"Test 1");
+			Assert::AreEqual(P("10/7").ToString(), GCF_PP_P(P("0"), P("-10/7")).ToString(), L"Test 2");
+			Assert::AreEqual(P("100/7").ToString(), GCF_PP_P(P("-100/7"), P("100/7x")).ToString(), L"Test 3");
+			Assert::AreEqual(P("10/3x").ToString(), GCF_PP_P(P("10/3x"), P("10/3x^3")).ToString(), L"Test 4");
+			Assert::AreEqual(P("1").ToString(), GCF_PP_P(P("-1"), P("-99")).ToString(), L"Test 5");
+			Assert::AreEqual(P("x").ToString(), GCF_PP_P(P("-5x^3-x"), P("x^2")).ToString(), L"Test 6");
+			Assert::AreEqual(P("x").ToString(), GCF_PP_P(P("x^2"), P("x")).ToString(), L"Test 7");
+			Assert::AreEqual(P("x+1").ToString(), GCF_PP_P(P("x^2+5x+4"), P("x+1")).ToString(), L"Test 8");
+			Assert::AreEqual(P("3").ToString(), GCF_PP_P(P("5x^5+3"), P("5x^5")).ToString(), L"Test 9");
+			Assert::AreEqual(P("25").ToString(), GCF_PP_P(P("x^5+x^2+x+5"), P("x^2")).ToString(), L"Test 10");
+		}
+		TEST_METHOD(P_12_DER_P_P_Tests) {
+			Assert::AreEqual(P("15/2x^9+6").ToString(), DER_P_P(P("3/4x^10+6x+8")).ToString(), L"Test 1");
+			Assert::AreEqual(P("4x+4").ToString(), DER_P_P(P("2x^2+4x")).ToString(), L"Test 2");
+			Assert::AreEqual(P("0").ToString(), DER_P_P(P("12")).ToString(), L"Test 3");
+		}
+		TEST_METHOD(P_13_NMR_P_P_Tests) {
+			Assert::AreEqual(P("x+2").ToString(), NMR_P_P(P("x^2+4x+4")).ToString(), L"Test 1");
+			Assert::AreEqual(P("5x+3").ToString(), NMR_P_P(P("5x+3")).ToString(), L"Test 2");
+			Assert::AreEqual(P("0").ToString(), NMR_P_P(P("0")).ToString(), L"Test 3");
+		}
+	};
 }
