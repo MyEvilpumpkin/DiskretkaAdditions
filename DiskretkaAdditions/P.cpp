@@ -232,26 +232,24 @@ P ADD_PP_P(const P& p1, const P& p2) {
 // P-2
 P SUB_PP_P(const P& p1, const P& p2) {
 	P result;
-	const P* first,* second;
-	if (p1.power> p2.power) { // Определить, у какого многочлена степень больше и, если надо, поменять их местами
-		first = &p1;
-		second = &p2;
-	}
-	else {
-		first = &p2;
-		second = &p1;
-	}
-	result.coefficients = new Q[first->power + 1]; // Выделяем память для разности многочленов
-	result.power = first->power; // Степень разности равна степени большего из многочленов
-	for (size_t i = 0; i <= first->power; i++) { // Цикл от младшей степени большего числа до последней
-		if (i > second->power) { // Если исследуемая степень первого многочлена больше степени второго
-			Q temp;
-			temp.SetZero();
-			result.coefficients[i] = SUB_QQ_Q(temp, first->coefficients[i]);
-		}
-		else
-			result.coefficients[i] = SUB_QQ_Q(p1.coefficients[i], p2.coefficients[i]); // Иначе производим вычитание коэффициентов
-	}
+	int maxPower = p1.power > p2.power ? p1.power : p2.power;
+	result.coefficients = new Q[maxPower + 1]; // Выделяем память для разности многочленов
+	result.power = maxPower; // Степень разности равна степени большего из многочленов
+	if (maxPower == p1.power)
+		for (size_t i = 0; i <= maxPower; i++) // Цикл от младшей степени большего числа до последней
+			if (i > p2.power) // Если исследуемая степень первого многочлена больше степени второго
+				result.coefficients[i] = p1.coefficients[i];
+			else
+				result.coefficients[i] = SUB_QQ_Q(p1.coefficients[i], p2.coefficients[i]); // Иначе производим вычитание коэффициентов
+	else
+		for (size_t i = 0; i <= maxPower; i++) // Цикл от младшей степени большего числа до последней
+			if (i > p1.power) { // Если исследуемая степень первого многочлена больше степени второго
+				Q temp;
+				temp.SetZero();
+				result.coefficients[i] = SUB_QQ_Q(temp,p2.coefficients[i]);
+			}
+			else
+				result.coefficients[i] = SUB_QQ_Q(p1.coefficients[i], p2.coefficients[i]); // Иначе производим вычитание коэффициентов
 	result.Normalize();
 	return result;
 }
@@ -268,7 +266,7 @@ P MUL_PQ_P(const P& p, const Q& q) {
 }
 
 // P-4
-P MUL_Pxk_P(const P& p, const int k) {
+P MUL_Pxk_P(const P& p, const unsigned int k) {
 	P result;
 	result.coefficients = new Q[p.power + k + 1]; // Выделение памяти
 	result.power = p.power + k; // Присваиваем степени многочлена-результата сумму степени исходного многочлена и степени k
@@ -294,20 +292,26 @@ N DEG_P_N(const P& p) {
 Q FAC_P_Q(const P& p) {
 	Q temp;
 	temp.SetOne();
-	N nod = TRANS_Z_N(TRANS_Q_Z(p.coefficients[p.power])); // НОД числителей, изначально присваиваем значение, равное числителю старшего коэффициента многочлена
-	Q div = DIV_QQ_Q(temp, p.coefficients[p.power]);
-	N nok = TRANS_Z_N(TRANS_Q_Z(div)); // НОК знаменателей, изначально присваиваем значение, равное знаменателю старшего коэффициента многочлена
 	Q result; // Числитель дроби - НОД числителей, знаменатель - НОК знаменателей
-	int i; // Для перебора коэффициентов многочлена
-	for (i = (int)p.power - 1; i >= 0; i--) { // Перебираем все коэффициенты многочлена, начиная с "предстаршего" (т.к. старший занес в НОК изначально)
-		Q div = DIV_QQ_Q(temp, p.coefficients[i]);
-		nok = LCM_NN_N(nok, TRANS_Z_N(TRANS_Q_Z(div))); // Находим поочередно НОК общего НОК и данного коэффициента	
+	if (p.IsZero())
+		result.SetZero();
+	else {
+		N nod = TRANS_Z_N(TRANS_Q_Z(p.coefficients[p.power])); // НОД числителей, изначально присваиваем значение, равное числителю старшего коэффициента многочлена
+		Q div = DIV_QQ_Q(temp, p.coefficients[p.power]);
+		N nok = TRANS_Z_N(TRANS_Q_Z(div)); // НОК знаменателей, изначально присваиваем значение, равное знаменателю старшего коэффициента многочлена
+		int i; // Для перебора коэффициентов многочлена
+		for (i = (int)p.power - 1; i >= 0; i--) { // Перебираем все коэффициенты многочлена, начиная с "предстаршего" (т.к. старший занес в НОК изначально)
+			if (!p.coefficients[i].IsZero()) {
+				Q div = DIV_QQ_Q(temp, p.coefficients[i]);
+				nok = LCM_NN_N(nok, TRANS_Z_N(TRANS_Q_Z(div))); // Находим поочередно НОК общего НОК и данного коэффициента	
+			}
+		}
+		for (i = (int)p.power - 1; i >= 0; i--) // Перебираем все коэффициенты многочлена, начиная с "предстаршего" (т.к. старший занес в НОД изначально)
+			if (!p.coefficients[i].IsZero())
+				nod = GCF_NN_N(nod, TRANS_Z_N(TRANS_Q_Z(p.coefficients[i]))); // Находим поочередно НОД общего НОД и данного коэффициента
+		result = TRANS_Z_Q(TRANS_N_Z(nod));
+		result = DIV_QQ_Q(result, TRANS_Z_Q(TRANS_N_Z(nok)));
 	}
-	for (i = (int)p.power - 1; i >= 0; i--) // Перебираем все коэффициенты многочлена, начиная с "предстаршего" (т.к. старший занес в НОД изначально)
-		if (p.coefficients[i].IsZero())
-			nod = GCF_NN_N(nod, TRANS_Z_N(TRANS_Q_Z(p.coefficients[i]))); // Находим поочередно НОД общего НОД и данного коэффициента
-	result = TRANS_Z_Q(TRANS_N_Z(nod));
-	result = DIV_QQ_Q(result, TRANS_Z_Q(TRANS_N_Z(nok)));
 	return result;
 }
 
@@ -349,17 +353,24 @@ P MOD_PP_P(const P& p1, const P& p2) {
 	return result;
 }
 
-// P-11 (Из-за того, что коэффициенты рациональные, работает не так как ожидается)
+// P-11
 P GCF_PP_P(const P& p1, const P& p2) {
 	P result;
 	P first = p1;
 	P second = p2;
 	while (!second.IsZero() && !first.IsZero()) // Цикл пока оба многочлена - не нулевые
-		if (first.power> second.power) // Если степень первого многочлена больше степени второго
+		if (first.power > second.power) // Если степень первого многочлена больше степени второго
 			first = MOD_PP_P(first, second); // Присваиваем ему остаток от деления многочленов
-		else
+		else if (first.power < second.power)
 			second = MOD_PP_P(second, first);
-	if (first.power> second.power) // Если степень первого многочлена оказалась больше второго
+		else {
+			Q temp = LED_P_Q(SUB_PP_P(p1, p2));
+			if (POZ_Z_D(TRANS_Q_Z(temp)) != 1)
+				first = MOD_PP_P(first, second); // Присваиваем ему остаток от деления многочленов
+			else
+				second = MOD_PP_P(second, first);
+		}
+	if (second.IsZero()) // Если степень первого многочлена оказалась больше второго
 		result = first; // Присваиваем результату (остатку) значение первого многочлена
 	else
 		result = second; // Наоборот
@@ -382,10 +393,15 @@ P DER_P_P(const P& p) {
 
 // P-13
 P NMR_P_P(const P& p) {
-	P result = DIV_PP_P(p, GCF_PP_P(p, DER_P_P(p))); // Частное от деления многочленов  
-	Q temp;
-	temp.SetOne();
-	result = MUL_PQ_P(result, DIV_QQ_Q(temp, FAC_P_Q(result))); // Присваиваем результату значение произведения
+	P result;
+	if (p.power) {
+		result = DIV_PP_P(p, GCF_PP_P(p, DER_P_P(p))); // Частное от деления многочленов  
+		Q temp;
+		temp.SetOne();
+		result = MUL_PQ_P(result, DIV_QQ_Q(temp, FAC_P_Q(result))); // Присваиваем результату значение произведения
+	}
+	else
+		result = p;
 	return result;
 }
 
