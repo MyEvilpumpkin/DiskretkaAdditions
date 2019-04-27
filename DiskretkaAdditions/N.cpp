@@ -54,6 +54,7 @@ N::~N() {
 N& N::operator=(const N& n) {
 	if (this != &n) {
 		delete[] digits;
+		digits = nullptr;
 		size = 0;
 		if (n.size) {
 			size = n.size;
@@ -78,6 +79,7 @@ N& N::operator=(N&& n) noexcept {
 
 void N::SetZero() {
 	delete[] digits;
+	digits = nullptr;
 	digits = new digit[1];
 	digits[0] = 0;
 	size = 1;
@@ -85,6 +87,7 @@ void N::SetZero() {
 
 void N::SetOne() {
 	delete[] digits;
+	digits = nullptr;
 	digits = new digit[1];
 	digits[0] = 1;
 	size = 1;
