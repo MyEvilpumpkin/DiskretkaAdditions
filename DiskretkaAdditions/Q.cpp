@@ -38,14 +38,10 @@ Q::Q(const std::string str) : Q() {
 				denominator.digits[denominator.size - 1 - i] = temp;
 			}
 		}
-		if (!numerator.number.size)
-			numerator.number.SetOne();
-		else {
-			for (size_t i = 0; i < (numerator.number.size / 2); i++) {
-				digit temp = numerator.number.digits[i];
-				numerator.number.digits[i] = numerator.number.digits[numerator.number.size - 1 - i];
-				numerator.number.digits[numerator.number.size - 1 - i] = temp;
-			}
+		for (size_t i = 0; i < (numerator.number.size / 2); i++) {
+			digit temp = numerator.number.digits[i];
+			numerator.number.digits[i] = numerator.number.digits[numerator.number.size - 1 - i];
+			numerator.number.digits[numerator.number.size - 1 - i] = temp;
 		}
 		Normalize();
 	}

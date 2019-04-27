@@ -19,14 +19,11 @@ Z::Z(const std::string str) : Z() {
 			number.digits[number.size++] = tempStr[pos + 1] - '0';
 			pos++;
 		}
-		if (!number.size)
-			number.SetOne();
-		else
-			for (size_t i = 0; i < (number.size / 2); i++) {
-				digit temp = number.digits[i];
-				number.digits[i] = number.digits[number.size - 1 - i];
-				number.digits[number.size - 1 - i] = temp;
-			}
+		for (size_t i = 0; i < (number.size / 2); i++) {
+			digit temp = number.digits[i];
+			number.digits[i] = number.digits[number.size - 1 - i];
+			number.digits[number.size - 1 - i] = temp;
+		}
 	}
 	else
 		throw IncorrectString();

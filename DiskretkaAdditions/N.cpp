@@ -18,17 +18,10 @@ N::N(const std::string str) : N() {
 			digits[size++] = tempStr[pos] - '0';
 			pos++;
 		}
-		if (!size) {
-			digits = new digit;
-			digits[0] = 1;
-			size++;
-		}
-		else {
-			for (size_t i = 0; i < (size / 2); i++) {
-				digit temp = digits[i];
-				digits[i] = digits[size - 1 - i];
-				digits[size - 1 - i] = temp;
-			}
+		for (size_t i = 0; i < (size / 2); i++) {
+			digit temp = digits[i];
+			digits[i] = digits[size - 1 - i];
+			digits[size - 1 - i] = temp;
 		}
 	}
 	else
