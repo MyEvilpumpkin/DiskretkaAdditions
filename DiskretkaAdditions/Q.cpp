@@ -129,13 +129,14 @@ void Q::Normalize() {
 }
 
 // Q-1
-Q RED_Q_Q(Q& q) {
-	q.Normalize();
-	return q;
+Q RED_Q_Q(const Q& q) {
+	Q result(q);
+	result.Normalize();
+	return result;
 }
 
 // Q-2
-bool INT_Q_B(Q& q) {
+bool INT_Q_B(const Q& q) {
 	return (RED_Q_Q(q).denominator.IsOne()); // Возвращаем истинность высказывания о том, что знаменатель дроби = 1
 }
 
@@ -148,7 +149,7 @@ Q TRANS_Z_Q(const Z& z) {
 }
 
 // Q-4
-Z TRANS_Q_Z(Q& q) {
+Z TRANS_Q_Z(const Q& q) {
 	return Z(RED_Q_Q(q).numerator); // Возвращаем значение числителя сокращенной дроби 
 }
 

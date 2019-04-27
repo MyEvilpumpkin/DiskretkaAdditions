@@ -298,16 +298,11 @@ Q FAC_P_Q(const P& p) {
 		result.SetZero();
 	else {
 		N nod = TRANS_Z_N(TRANS_Q_Z(p.coefficients[p.power])); // НОД числителей, изначально присваиваем значение, равное числителю старшего коэффициента многочлена
-		Q div = DIV_QQ_Q(temp, p.coefficients[p.power]);
-		N nok = TRANS_Z_N(TRANS_Q_Z(div)); // НОК знаменателей, изначально присваиваем значение, равное знаменателю старшего коэффициента многочлена
-		int i; // Для перебора коэффициентов многочлена
-		for (i = (int)p.power - 1; i >= 0; i--) { // Перебираем все коэффициенты многочлена, начиная с "предстаршего" (т.к. старший занес в НОК изначально)
-			if (!p.coefficients[i].IsZero()) {
-				Q div = DIV_QQ_Q(temp, p.coefficients[i]);
-				nok = LCM_NN_N(nok, TRANS_Z_N(TRANS_Q_Z(div))); // Находим поочередно НОК общего НОК и данного коэффициента	
-			}
-		}
-		for (i = (int)p.power - 1; i >= 0; i--) // Перебираем все коэффициенты многочлена, начиная с "предстаршего" (т.к. старший занес в НОД изначально)
+		N nok = TRANS_Z_N(TRANS_Q_Z(DIV_QQ_Q(temp, p.coefficients[p.power]))); // НОК знаменателей, изначально присваиваем значение, равное знаменателю старшего коэффициента многочлена
+		for (int i = (int)p.power - 1; i >= 0; i--) // Перебираем все коэффициенты многочлена, начиная с "предстаршего" (т.к. старший занес в НОК изначально)
+			if (!p.coefficients[i].IsZero())
+				nok = LCM_NN_N(nok, TRANS_Z_N(TRANS_Q_Z(DIV_QQ_Q(temp, p.coefficients[i])))); // Находим поочередно НОК общего НОК и данного коэффициента	
+		for (int i = (int)p.power - 1; i >= 0; i--) // Перебираем все коэффициенты многочлена, начиная с "предстаршего" (т.к. старший занес в НОД изначально)
 			if (!p.coefficients[i].IsZero())
 				nod = GCF_NN_N(nod, TRANS_Z_N(TRANS_Q_Z(p.coefficients[i]))); // Находим поочередно НОД общего НОД и данного коэффициента
 		result = TRANS_Z_Q(TRANS_N_Z(nod));
@@ -373,8 +368,7 @@ P GCF_PP_P(const P& p1, const P& p2) {
 			Q q2 = LED_P_Q(p2);
 			if (POZ_Z_D(TRANS_Q_Z(q2)) == 1)
 				q2 = SUB_QQ_Q(zero, q2);
-			Q temp = SUB_QQ_Q(q1, q2);
-			if (POZ_Z_D(TRANS_Q_Z(temp)) != 1)
+			if (POZ_Z_D(TRANS_Q_Z(SUB_QQ_Q(q1, q2))) != 1)
 				first = MOD_PP_P(first, second); // Присваиваем ему остаток от деления многочленов
 			else
 				second = MOD_PP_P(second, first);
@@ -383,8 +377,7 @@ P GCF_PP_P(const P& p1, const P& p2) {
 		result = first; // Присваиваем результату (остатку) значение первого многочлена
 	else
 		result = second; // Наоборот
-	Q temp = LED_P_Q(result);
-	if (POZ_Z_D(TRANS_Q_Z(temp)) == 1) {
+	if (POZ_Z_D(TRANS_Q_Z(LED_P_Q(result))) == 1) {
 		P zero;
 		zero.SetZero();
 		result = SUB_PP_P(zero, result);
