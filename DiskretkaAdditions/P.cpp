@@ -266,14 +266,15 @@ P MUL_PQ_P(const P& p, const Q& q) {
 }
 
 // P-4
-P MUL_Pxk_P(const P& p, const int k) {
+P MUL_Pxk_P(const P& p, const unsigned int k) {
 	P result;
 	result.coefficients = new Q[p.power + k + 1]; // Выделение памяти
 	result.power = p.power + k; // Присваиваем степени многочлена-результата сумму степени исходного многочлена и степени k
-	for (int i = (int)result.power; i >= k; i--) // Цикл от старшего коэффициента многочлена до степени k
+	for (size_t i = k; i <= result.power; i++) // Цикл от старшего коэффициента многочлена до степени k
 		result.coefficients[i] = p.coefficients[i - k]; // Присваиваем текущему коэффициенту многочлена-результата коэффициент исходного многочлена "отстающий" на k
-	for (int i = k - 1; i >= 0; i--) // Цикл от степени k-1 до младшего коэффициента многочлена
-		result.coefficients[i].SetZero(); // Смещаем наш многочлен на одну степень
+	if (k)
+		for (size_t i = 0; i <= k - 1; i++) // Цикл от степени k-1 до младшего коэффициента многочлена
+			result.coefficients[i].SetZero(); // Смещаем наш многочлен на одну степень
 	result.Normalize();
 	return result;
 }
@@ -320,7 +321,7 @@ P MUL_PP_P(const P& p1, const P& p2) {
 	P result;
 	result.SetZero();
 	for (size_t i = 0; i <= p1.power; i++)
-		result = ADD_PP_P(result, MUL_Pxk_P(MUL_PQ_P(p2, p1.coefficients[i]), (const int)i));
+		result = ADD_PP_P(result, MUL_Pxk_P(MUL_PQ_P(p2, p1.coefficients[i]), (const unsigned int)i));
 	return result;
 }
 
@@ -340,7 +341,7 @@ P DIV_PP_P(const P& p1, const P& p2) {
 				result.coefficients[i - p2.power] = DIV_QQ_Q(part.coefficients[i], p2.coefficients[p2.power]); // Вычисления коэффициента перед степенью в результате
 			else
 				result.coefficients[i - p2.power].SetZero();
-			part = SUB_PP_P(part, MUL_Pxk_P(MUL_PQ_P(p2, result.coefficients[i - p2.power]), (const int)(i - p2.power))); // Вычитаем из остатка часть частного, умноженную на делитель
+			part = SUB_PP_P(part, MUL_Pxk_P(MUL_PQ_P(p2, result.coefficients[i - p2.power]), (const unsigned int)(i - p2.power))); // Вычитаем из остатка часть частного, умноженную на делитель
 		}
 	}
 	return result;
