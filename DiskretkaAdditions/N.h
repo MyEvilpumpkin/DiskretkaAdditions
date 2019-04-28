@@ -30,6 +30,9 @@ public:
 	std::string ToString() const override; // Преобразование N в std::string
 	void Normalize() override;             // Нормализация числа
 
+	//Вспомогательные функции
+	unsigned int ToUInt(); // Преобразование N в unsigned int
+
 	// Дружественные функции
 	friend int COM_NN_D(const N&, const N&);                    // N-1
 	friend bool NZER_N_B(const N&);                             // N-2

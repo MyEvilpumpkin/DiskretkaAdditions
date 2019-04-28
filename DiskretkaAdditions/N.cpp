@@ -119,6 +119,13 @@ void N::Normalize() {
 	}
 }
 
+unsigned int N::ToUInt() {
+	unsigned int num = 0;
+	for (int i = (int)size - 1; i >= 0; i--)
+		num = num * 10 + digits[i];
+	return num;
+}
+
 // N-1
 int COM_NN_D(const N& n1, const N& n2) {
 	if (n1.size > n2.size) // Если первое число больше второго
